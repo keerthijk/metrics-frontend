@@ -1,23 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useEffect, useState } from 'react';
+import MetricForm from './components/MetricForm';
+import MetricsList from './components/MetricsList';
+import { fetchMetrics } from './api/metrics';
 
 function App() {
+  const [metrics, setMetrics] = useState([]);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+
+  const getMetrics = async () => {
+    const data = await fetchMetrics();
+    setMetrics(data);
+  };
+
+  useEffect(() => {
+    getMetrics();
+  }, []);
+
+  const clearMessages = () => {
+    setMessage('');
+    setError('');
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MetricForm
+        onMetricCreated={getMetrics} 
+        setMessage={setMessage}
+        setError={setError}
+        clearMessages={clearMessages}
+        message={message}
+        error={error}
+      />
+      <MetricsList 
+        metrics={metrics} 
+        clearMessages={clearMessages}
+        setMessage={setMessage}
+        setError={setError}
+        message={message}
+        error={error}
+      />
     </div>
   );
 }
