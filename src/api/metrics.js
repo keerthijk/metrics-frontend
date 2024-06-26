@@ -13,7 +13,8 @@ export const createMetric = async (metric) => {
     const response = await axios.post(API_URL, metric);
     return { data: response.data, message: response.data.message };
   } catch (error) {
-    return { error: error.response.data.error };
+    const errorMessage = error.response && error.response.data ? error.response.data.error : 'Unknown error';
+    return { error: errorMessage };
   }
 };
 
@@ -24,7 +25,8 @@ export const createMetricRecord = async (metricId, metricRecord) => {
     });
     return { data: response.data, message: response.data.message };
   } catch (error) {
-    return { error: error.response.data.error };
+    const errorMessage = error.response && error.response.data ? error.response.data.error : 'Unknown error';
+    return { error: errorMessage };
   }
 };
 
@@ -33,6 +35,7 @@ export const fetchMetricAverages = async (id) => {
     const response = await axios.get(`${API_URL}/${id}/averages`);
     return response.data;
   } catch (error) {
-    return { error: error.response.data.error };
+    const errorMessage = error.response && error.response.data ? error.response.data.error : 'Unknown error';
+    return { error: errorMessage };
   }
 };

@@ -1,48 +1,52 @@
-import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { fetchMetrics } from './api/metrics';
 import MetricForm from './components/MetricForm';
 import MetricsList from './components/MetricsList';
-import { fetchMetrics } from './api/metrics';
 
-function App() {
+function useMetrics() {
   const [metrics, setMetrics] = useState([]);
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
 
   const getMetrics = async () => {
-    const data = await fetchMetrics();
-    setMetrics(data);
+    try {
+      const data = await fetchMetrics();
+      setMetrics(data);
+    } catch (error) {
+      console.error("Failed to fetch metrics:", error);
+    }
   };
 
   useEffect(() => {
     getMetrics();
   }, []);
 
+  return [metrics, getMetrics];
+}
+
+function App() {
+  const [metrics, getMetrics] = useMetrics();
+  const [statusMessage, setStatusMessage] = useState({ message: '', error: '' });
+
   const clearMessages = () => {
-    setMessage('');
-    setError('');
+    setStatusMessage({ message: '', error: '' });
   };
 
   return (
     <div className="App">
       <MetricForm
-        onMetricCreated={getMetrics} 
-        setMessage={setMessage}
-        setError={setError}
+        onMetricCreated={getMetrics}
+        setStatusMessage={setStatusMessage}
         clearMessages={clearMessages}
-        message={message}
-        error={error}
+        statusMessage={statusMessage}
       />
-      <MetricsList 
-        metrics={metrics} 
+      <MetricsList
+        metrics={metrics}
         clearMessages={clearMessages}
-        setMessage={setMessage}
-        setError={setError}
-        message={message}
-        error={error}
+        setStatusMessage={setStatusMessage}
+        statusMessage={statusMessage}
       />
     </div>
   );
 }
 
 export default App;
+// In the App component, we define a custom hook useMetrics that fetches metrics from the API and returns the metrics and a function to fetch the metrics. We then use this custom hook in the App component to fetch metrics and pass the metrics to the MetricList and MetricForm components.
