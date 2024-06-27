@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Metrics Frontend App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -15,7 +15,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 For running tests
 
 ### Features
-1. Create metric with a name. Name is mandatory. The minimum value 2 and the maximum value is 50
+1. Create a metric with a name. Name is mandatory. The minimum value 2 and the maximum value is 50
 2. List all metrics with option to add records and show the timeline
 3. Add a metric record with timestamp and value. Both fields are mandatory
 4. Timeline will show all records and the average value per minute, hour, and day.
