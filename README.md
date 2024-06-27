@@ -15,12 +15,15 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 For running tests
 
 ### Features
-1. Create metric with a name. Name is mandatory. Minimum value 2 and maximum value is 50
-2. List all metrics with option to add records and show timeline
-3. Add metric record with timestamp and value. Both fields are mandatory
-4. Timeline will show all reocrds and also average value per minute, hour and day.
+1. Create metric with a name. Name is mandatory. The minimum value 2 and the maximum value is 50
+2. List all metrics with option to add records and show the timeline
+3. Add a metric record with timestamp and value. Both fields are mandatory
+4. Timeline will show all records and the average value per minute, hour, and day.
 
 ## Todos
 1. When listing the timeline it should show the recent ones first
-2. Sort records based on timestamp
-3. Integration tests and E2E tests
+2. Improve UI and show the timeline as a graph
+3. Sort records based on timestamp
+4. Integration tests and E2E tests
+5. Fix the warnings that are shown while running tests
+   
