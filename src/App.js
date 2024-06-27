@@ -24,25 +24,27 @@ function useMetrics() {
 
 function App() {
   const [metrics, getMetrics] = useMetrics();
-  const [statusMessage, setStatusMessage] = useState({ message: '', error: '' });
+  const [metricFormStatusMessage, setMetricFormStatusMessage] = useState({ message: '', error: '' });
+  const [metricRecordFormStatusMessage, setMetricRecordFormStatusMessage] = useState({ message: '', error: '' });
 
   const clearMessages = () => {
-    setStatusMessage({ message: '', error: '' });
+    setMetricFormStatusMessage({ message: '', error: '' });
+    setMetricRecordFormStatusMessage({ message: '', error: '' });
   };
 
   return (
     <div className="App">
       <MetricForm
         onMetricCreated={getMetrics}
-        setStatusMessage={setStatusMessage}
+        setStatusMessage={setMetricFormStatusMessage}
         clearMessages={clearMessages}
-        statusMessage={statusMessage}
+        statusMessage={metricFormStatusMessage}
       />
       <MetricsList
         metrics={metrics}
         clearMessages={clearMessages}
-        setStatusMessage={setStatusMessage}
-        statusMessage={statusMessage}
+        setStatusMessage={setMetricRecordFormStatusMessage}
+        statusMessage={metricRecordFormStatusMessage}
       />
     </div>
   );
